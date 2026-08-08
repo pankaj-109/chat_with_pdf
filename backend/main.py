@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from config import CORS_ORIGINS, validate_config
+from config import validate_config
 from database import init_db
 from routes import chat, documents, session
 
@@ -28,13 +28,13 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Chat with PDF", lifespan=lifespan)
 
+# Allowed origins set to "*" to fix Vercel preflight CORS error
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[origin.strip() for origin in CORS_ORIGINS.split(",")],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
-    # Explicitly allow the custom session header (and the rest).
-    allow_headers=["*", "X-Session-Id"],
+    allow_headers=["*"],
 )
 
 app.include_router(documents.router)
