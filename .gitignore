@@ -1,0 +1,30 @@
+# --- Python / backend ---
+backend/venv/
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Secrets
+.env
+
+# Databases / vector store
+*.db
+chroma_db/
+
+# --- Node / frontend ---
+node_modules/
+frontend/dist/
+dist/
+*.local
+
+# Runtime logs
+*.log
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
