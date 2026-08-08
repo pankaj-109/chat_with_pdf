@@ -14,7 +14,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
 )
-logger = logging.getLogger(__name__)
+logger = logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
@@ -26,7 +26,12 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="Chat with PDF", lifespan=lifespan)
+# redirect_slashes=False adds immunity against 308 POST-to-GET redirect drops
+app = FastAPI(
+    title="Chat with PDF",
+    lifespan=lifespan,
+    redirect_slashes=False
+)
 
 # Allowed origins set to "*" to fix Vercel preflight CORS error
 app.add_middleware(
